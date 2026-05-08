@@ -54,7 +54,7 @@
       "page": "coming_soon.html"
     },
     {
-      "image": "images/PLC-Sorting-System.jpeg",
+      "image": "images/PLC-sorting-system.jpeg",
       "title": "Automated Hospital Supply Sorting PLC",
       "subtitle": "Ladder Logic & Machine Learning",
       "description": "Designed and simulated an automated medical supply conveyor network using Factory I/O and Siemens TIA Portal. The system utilizes Ladder Logic, sensors, and actuators to route packages to the ER, ICU, and Surgery wings. A companion Python machine learning model (Random Forest) was also developed to predict department demand based on temporal and environmental data.",
