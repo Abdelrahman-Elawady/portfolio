@@ -45,6 +45,23 @@
   ],
   "projects": [
     {
+      "image": "images/Mobile-Robot-WIP.png",
+      "title": "Self-Balancing Mobile Robot",
+      "subtitle": "Autonomous PID Control",
+      "description": "Currently developing a two-wheeled autonomous robot engineered to maintain an upright position. This ongoing project focuses on exploring dynamic control systems and sensor integration to achieve real-time balance and reactive stability.",
+      "date": "2026-05",
+      "link": "#",
+      "page": "coming_soon.html"
+    },
+    {
+      "image": "images/PLC-Sorting-System.jpeg",
+      "title": "Automated Hospital Supply Sorting PLC",
+      "subtitle": "Ladder Logic & Machine Learning",
+      "description": "Designed and simulated an automated medical supply conveyor network using Factory I/O and Siemens TIA Portal. The system utilizes Ladder Logic, sensors, and actuators to route packages to the ER, ICU, and Surgery wings. A companion Python machine learning model (Random Forest) was also developed to predict department demand based on temporal and environmental data.",
+      "date": "2026-05",
+      "link": "https://www.linkedin.com/posts/abdelrahmanelawady_plc-industrialautomation-siemens-ugcPost-7457902019509506049-fUI1?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC9AkNIBm3OMOSBrlaS70pPcim2XlX0p1Fw"
+    },
+    {
       "image": "images/Plasma.jpg",
       "title": "Ionic Plasma Thruster",
       "subtitle": "Fuel-less Propulsion System",
