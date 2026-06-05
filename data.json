@@ -45,11 +45,11 @@
   ],
   "projects": [
     {
-      "image": "images/Mobile-Robot-WIP.png",
-      "title": "Self-Balancing Mobile Robot",
-      "subtitle": "Autonomous PID Control",
-      "description": "Currently developing a two-wheeled autonomous robot engineered to maintain an upright position. This ongoing project focuses on exploring dynamic control systems and sensor integration to achieve real-time balance and reactive stability.",
-      "date": "2026-05",
+      "image": "images/SPLIT.jpg",
+      "title": "SPLIT Autonomous Robotic Swarm",
+      "subtitle": "Cascaded PID & Computer Vision",
+      "description": "Designed and fabricated a two-wheeled autonomous robotic swarm architecture optimized for high-density warehouse logistics. This system features a distributed ESP32 network, an MPU6050 sensor fused with a Kalman filter, and a custom cascaded PID control system operating at 200 Hz for flawless inverted pendulum stability. The project is further enhanced by an integrated OpenCV artificial intelligence model, enabling intuitive gesture-based teleoperation and fully autonomous pathfinding.",
+      "date": "2026-06",
       "link": "#",
       "page": "coming_soon.html"
     },
@@ -63,7 +63,7 @@
     },
     {
       "image": "images/Plasma.jpg",
-      "title": "Ionic Plasma Thruster",
+      "title": "Ionic Plasma Thruster for Marine Propulsion",
       "subtitle": "Fuel-less Propulsion System",
       "description": "This project focused on designing and implementing a fuel-less ionic propulsion system that generates thrust using high-voltage corona discharge and plasma wind, without any moving parts or fuel. The system utilized arc generator modules connected to ring electrodes to produce directional thrust through ionized air particles.",
       "date": "2025-05",
