@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project S.P.L.I.T. — Abdelrahman Elawady</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="shortcut icon" href="../portfolio.ico" type="image/x-icon" />
+    <style>
+      /* Project page specific styles */
+      .project-page {
+        max-width: 860px;
+        margin: 120px auto 80px;
+        padding: 0 30px;
+      }
+
+      .project-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent-primary);
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 2.5rem;
+        transition: gap 0.2s ease;
+        text-decoration: none;
+      }
+
+      .project-back:hover {
+        gap: 14px;
+        color: var(--accent-hover);
+      }
+
+      .project-hero {
+        width: 100%;
+        max-height: 450px;
+        object-fit: cover;
+        border-radius: 20px;
+        margin-bottom: 2.5rem;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+      }
+
+      .project-tag {
+        background: var(--bg-secondary);
+        color: var(--accent-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 50px;
+        padding: 5px 16px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .project-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        background: linear-gradient(
+          135deg,
+          var(--accent-primary),
+          var(--accent-secondary)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+
+      .project-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-tertiary);
+        margin-bottom: 2rem;
+        font-weight: 400;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+      }
+
+      .project-link-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 26px;
+        border-radius: 50px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        font-family: "Poppins", Arial, Helvetica, sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .project-link-btn.primary {
+        background: linear-gradient(
+          135deg,
+          var(--accent-primary),
+          var(--accent-secondary)
+        );
+        color: white;
+        border: none;
+      }
+
+      .project-link-btn.primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px var(--shadow-medium);
+        color: white;
+      }
+
+      .project-link-btn.secondary {
+        background: transparent;
+        color: var(--accent-primary);
+        border: 2px solid var(--accent-primary);
+      }
+
+      .project-link-btn.secondary:hover {
+        background: var(--accent-primary);
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      .project-divider {
+        border: none;
+        border-top: 1px solid var(--border-color);
+        margin: 2.5rem 0;
+      }
+
+      .project-section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+        color: var(--text-primary);
+        border-left: 4px solid var(--accent-primary);
+        padding-left: 15px;
+      }
+
+      .project-section h3 {
+        font-size: 1.3rem;
+        margin-top: 2rem;
+        margin-bottom: 0.8rem;
+        color: var(--text-primary);
+      }
+
+      .project-section p {
+        font-size: 1.05rem;
+        line-height: 1.85;
+        color: var(--text-secondary);
+        margin-bottom: 1.2rem;
+      }
+
+      .project-section ul {
+        padding-left: 1.5rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .project-section ul li {
+        font-size: 1.05rem;
+        line-height: 1.85;
+        color: var(--text-secondary);
+        margin-bottom: 0.6rem;
+      }
+
+      .project-img {
+        width: 100%;
+        border-radius: 14px;
+        margin: 1.5rem 0 0.5rem;
+        border: 1px solid var(--border-color);
+        background: #111; /* Gives a nice contrast for diagrams */
+      }
+
+      .project-img-caption {
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-tertiary);
+        margin-bottom: 2.5rem;
+        font-style: italic;
+      }
+
+      .math-block {
+        background: var(--bg-secondary);
+        padding: 1.5rem;
+        border-radius: 10px;
+        border-left: 3px solid var(--accent-secondary);
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        font-family: "Courier New", Courier, monospace;
+        color: var(--text-primary);
+        font-size: 1.1rem;
+        text-align: center;
+      }
+
+      @media screen and (max-width: 768px) {
+        .project-page {
+          margin-top: 100px;
+          padding: 0 20px;
+        }
+        .project-title {
+          font-size: 2.2rem;
+        }
+      }
+
+      /* Split Content Layout (Text next to images) */
+      .content-split {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+      }
+
+      .content-split .text-col {
+        flex: 1;
+      }
+
+      .content-split .img-col {
+        flex: 0 0 320px; /* Fixed width for the image column */
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .content-split .img-col img {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .content-split .img-col .caption {
+        font-size: 0.85rem;
+        color: var(--text-tertiary);
+        text-align: center;
+        font-style: italic;
+        margin-top: -0.5rem;
+      }
+
+      @media screen and (max-width: 768px) {
+        .content-split {
+          flex-direction: column;
+        }
+        .content-split .img-col {
+          flex: 1;
+          width: 100%;
+        }
+      }
+      .project-video {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 14px;
+        border: 1px solid var(--border-color);
+        margin: 1.5rem auto 2rem;
+        display: block;
+        background: #000; /* Keeps it black while loading */
+      }
+    </style>
+  </head>
+  <body class="dark-mode">
+    <header>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#contact-me">Contact</a></li>
+          <li class="theme-toggle-wrapper">
+            <button id="theme-toggle" aria-label="Toggle theme">
+              <svg
+                class="sun-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg
+                class="moon-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                ></path>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="project-page">
+      <a href="../index.html#projects" class="project-back"
+        >&#8592; Back to Projects</a
+      >
+
+      <img
+        src="../images/split.jpg"
+        alt="S.P.L.I.T. Robot Prototype"
+        class="project-hero"
+      />
+
+      <div class="project-tags">
+        <span class="project-tag">Control Theory</span>
+        <span class="project-tag">ESP32</span>
+        <span class="project-tag">Computer Vision</span>
+        <span class="project-tag">June 2026</span>
+      </div>
+
+      <h1 class="project-title">Project S.P.L.I.T.</h1>
+      <p class="project-subtitle">Snapping Pendulums Literally In Two</p>
+
+      <div class="project-links">
+        <a
+          href="https://youtube.com/shorts/5pqC18rpZ28?si=UU2d-mcTPvR_-PhV"
+          target="_blank"
+          class="project-link-btn primary"
+        >
+          &#9654; Watch Trailer
+        </a>
+        <a
+          href="https://github.com/Abdelrahman-Elawady/SPLIT"
+          target="_blank"
+          class="project-link-btn secondary"
+        >
+          View Code on GitHub
+        </a>
+      </div>
+
+      <hr class="project-divider" />
+
+      <div class="project-section">
+        <h2>Overview</h2>
+        <p>
+          Modern warehouse facilities face a critical spatial bottleneck:
+          traditional four-wheeled logistics robots require massive floor space
+          and wide aisles to maneuver safely. To solve this, my research group
+          at the <strong>University of Prince Mugrin (UPM)</strong> fully
+          designed, programmed, and constructed Project S.P.L.I.T., a highly
+          advanced, self-balancing robotic swarm architecture.
+        </p>
+        <img
+          src="../images/architecture.png"
+          alt="The Dual-MCU S.P.L.I.T. Robots"
+          class="project-img"
+        />
+        <p>
+          By navigating exclusively on two wheels as an inverted pendulum, these
+          robots drastically reduce their physical footprint. This allows
+          industrial facilities to narrow their aisles and maximize high-density
+          storage without sacrificing payload capacity.
+        </p>
+
+        <h3>The Multidisciplinary Challenge</h3>
+        <p>
+          This was not a simple plug-and-play assembly. Developing a robotic
+          swarm that can carry shifting payloads requires absolute mathematical
+          precision and high-speed data processing. We had to seamlessly blend
+          electrical engineering, complex control theory, and cutting-edge
+          artificial intelligence into a functional, industry-ready prototype.
+        </p>
+        <ul>
+          <li>
+            <strong>Hardware Modularization:</strong> Utilizing distributed
+            ESP32 microcontrollers to decouple physics processing from network
+            management.
+          </li>
+          <li>
+            <strong>Dynamic Stability:</strong> A custom 200 Hz cascaded PID
+            control system executing real-time sensor fusion.
+          </li>
+          <li>
+            <strong>Computer Vision:</strong> Eliminating traditional
+            controllers in favor of interactive, OpenCV-powered hand gesture
+            teleoperation.
+          </li>
+        </ul>
+      </div>
+
+      <hr class="project-divider" />
+
+      <div class="project-section">
+        <h2>Distributed Hardware Architecture: The Dual-MCU Paradigm</h2>
+        <p>
+          One of the most fatal flaws in DIY robotics is asking a single
+          microcontroller to handle both high-speed physics calculations and
+          heavy wireless network routing. When a processor pauses for just a few
+          milliseconds to process a Wi-Fi packet, a balancing robot will miss a
+          sensor reading and violently crash to the floor.
+        </p>
+        <p>
+          To solve this, we decoupled the processing load using a
+          <strong>Distributed Dual-MCU Architecture</strong> on each robot,
+          governed by a central Bridge router:
+        </p>
+
+        <img
+          src="../images/circuit_image.png"
+          alt="The Dual-MCU S.P.L.I.T. Robots"
+          class="project-img"
+        />
+        <p class="project-img-caption">
+          The finalized hardware: Drive MCU (bottom) and Cortex MCU (top)
+          stacked on the 3D-printed chassis.
+        </p>
+
+        <ul>
+          <li>
+            <strong>The Drive MCU (Physics Engine):</strong> An ESP32 dedicated
+            entirely to survival. Its Wi-Fi radio is physically disabled via
+            code to free up hardware interrupts. It reads the MPU6050 IMU via
+            I2C, tracks the quadrature encoders, and executes the 200 Hz
+            balancing math.
+          </li>
+          <li>
+            <strong>The Cortex MCU (The Brain):</strong> A secondary ESP32 that
+            handles payload actuation (the servo grippers) and acts as the
+            communications relay. It talks to the Drive MCU via a blazing-fast
+            500,000 baud hardware UART connection, using a custom
+            <code>0xAA 0xAA</code> byte header system to prevent data
+            corruption.
+          </li>
+          <li>
+            <strong>The Bridge MCU (The Router):</strong> A central hub plugged
+            into the control station. It hosts a local Wi-Fi Access Point and
+            Web Server via SPIFFS, and routes traffic to the robot swarm via the
+            ultra-low-latency ESP-NOW protocol.
+          </li>
+        </ul>
+
+        <h3>Node Communication Topology</h3>
+        <img
+          src="../images/softwarearch.png"
+          alt="Node Communication Topology"
+          class="project-img"
+        />
+        <p class="project-img-caption">
+          Sequence diagram detailing the downstream command routing and upstream
+          200Hz telemetry flow.
+        </p>
+      </div>
+
+      <hr class="project-divider" />
+      <div class="project-section">
+        <h2>Hardware & Actuation</h2>
+
+        <div class="content-split">
+          <div class="text-col">
+            <p>
+              The brains of S.P.L.I.T. rely on the
+              <strong>ESP32 Microcontroller</strong>. Operating with a dual-core
+              processor clocked at 240 MHz, it provides a massive computing
+              upgrade over standard 16 MHz Arduino boards. This high clock speed
+              is exactly what allowed our Drive MCU to easily sustain a 200 Hz
+              PID loop frequency while simultaneously reading hardware
+              interrupts from the wheel encoders.
+            </p>
+            <p>
+              For locomotion, we utilized 12V DC Gear Motors (JG37-520), with
+              10kRPM reduced with 1:30 gear ratio to 333RPM,driven by an
+              H-Bridge L298N motor controller. These motors were selected for
+              their integrated magnetic quadrature encoders, which provide the
+              high-resolution position feedback required for the secondary
+              speed/position PID loop. We push the PWM frequency to 5000 Hz with
+              8-bit resolution to ensure completely silent and buttery-smooth
+              motor acceleration, eliminating the high-pitched whine common in
+              lower-frequency robotics, though it wasn't 100% eliminated (just
+              sounded better than the 1khz - trying it was fun - to her
+              electricity like in transformers).
+            </p>
+            <p>
+              To measure the tilt of the robot, we implemented the
+              <strong>MPU6050 6-axis IMU</strong>. We specifically bypassed the
+              onboard DMP (Digital Motion Processor) because it introduces
+              processing delays. Instead, we pulled the raw accelerometer and
+              gyroscope data via a 400kHz I2C bus and ran it through our own
+              mathematically optimized Kalman filter on the ESP32.
+            </p>
+            <p>
+              For payload manipulation, we needed a mechanism that moved
+              linearly without throwing off the robot's center of mass. We
+              utilized a <strong>Rack and Pinion Servo Gripper</strong> driven
+              by a high-torque MG995/DS5160 servo. The brilliant foundational
+              design for this parallel jaw movement was created by
+              <a
+                href="https://www.thingiverse.com/thing:2661755"
+                target="_blank"
+                style="color: var(--accent-primary)"
+                >PapaBravo on Thingiverse</a
+              >. We imported his STL files into Tinkercad, heavily adapting and
+              scaling the design to securely mount to our specific chassis and
+              handle larger payloads.
+            </p>
+          </div>
+
+          <div class="img-col">
+            <img src="../images/esp32.png" alt="ESP32 Microcontroller" />
+            <div class="caption">ESP32 Dual-Core MCU</div>
+
+            <img src="../images/motor.jpg" alt="Motor Driver" />
+            <div class="caption">DC Motor datasheet</div>
+
+            <img src="../images/gripper.png" alt="Tinkercad Rack and Pinion" />
+            <div class="caption">
+              Adapted Rack & Pinion Gripper (Original by PapaBravo)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="project-divider" />
+      <div class="project-section">
+        <h2>Control Theory: Taming the Inverted Pendulum</h2>
+        <p>
+          Keeping a two-wheeled robot upright is a classic control theory
+          problem. Because the center of mass sits high above the wheel axis,
+          the system is naturally unstable. To maintain equilibrium, we
+          implemented a
+          <strong
+            >Cascaded PID (Proportional-Integral-Derivative) Controller</strong
+          >.
+        </p>
+
+        <div class="math-block">
+          $$ Output(t) = K_p \cdot e(t) + K_i \int_{0}^{t} e(\tau) d\tau + K_d
+          \frac{de(t)}{dt} $$
+        </div>
+
+        <p>
+          The system relies on three simultaneous control loops working in
+          harmony:
+        </p>
+        <ul>
+          <li>
+            <strong>The Inner Angle Loop (200 Hz):</strong> The fastest loop. It
+            calculates the difference between the robot's current tilt (derived
+            from a Kalman filter) and the target angle, outputting raw PWM
+            signals to the motor drivers to prevent falling.
+          </li>
+          <li>
+            <strong>The Outer Speed/Position Loop (10 Hz):</strong> Reads the
+            high-resolution wheel encoders. If the robot drifts from its target
+            position, this loop calculates an error and slightly shifts the
+            <em>Target Angle</em> of the inner loop. The robot leans forward to
+            catch itself, naturally driving it to the correct location.
+          </li>
+          <li>
+            <strong>The Yaw Loop (200 Hz):</strong> Reads the Z-axis gyroscope
+            to ensure the two motors spin in perfect synchronization, preventing
+            the robot from unintentionally spinning out of control during rapid
+            accelerations.
+          </li>
+        </ul>
+        <p>
+          Rather than relying on the MPU6050's built-in DMP (Digital Motion
+          Processor)—which introduces unwanted latency—we process the raw
+          accelerometer and gyroscope data directly through our own programmed
+          <strong>Kalman Filter</strong>. This allows us to optimally fuse the
+          data, filtering out high-frequency motor vibrations while correcting
+          long-term gyroscope drift.
+        </p>
+      </div>
+
+      <hr class="project-divider" />
+
+      <div class="project-section">
+        <h2>Wireless Swarm Telemetry & Control Dashboard</h2>
+        <p>
+          Tuning a cascaded PID controller requires extreme patience. Hardcoding
+          values and flashing the ESP32 takes 30 seconds per attempt. To solve
+          this, we built a comprehensive telemetry dashboard hosted entirely on
+          the Bridge MCU's SPIFFS memory.
+        </p>
+
+        <img
+          src="../images/perfect.jpg"
+          alt="S.P.L.I.T. Web Dashboard"
+          class="project-img"
+        />
+        <p class="project-img-caption">
+          The custom HTML/JS Web App serving real-time 200Hz telemetry graphs
+          via WebSockets.
+        </p>
+
+        <p>
+          By connecting a phone or laptop to the Bridge MCU's local Wi-Fi
+          network, operators can access a responsive interface to:
+        </p>
+        <ul>
+          <li>
+            <strong>Live Tune PID Values:</strong> Adjust Kp, Ki, and Kd
+            parameters on the fly with sliders. The values are instantly updated
+            in the robot's RAM and saved to the Drive MCU's non-volatile EEPROM
+            for permanent storage.
+          </li>
+          <li>
+            <strong>Monitor Diagnostics:</strong> View real-time, auto-scaling
+            graphs of the robot's pitch angle, motor output, and error terms
+            plotted over time, updating at up to 20 frames per second.
+          </li>
+          <li>
+            <strong>Manual Swarm Override:</strong> Seamlessly take manual
+            control of individual robots using an on-screen joystick or D-pad,
+            and actuate the 3D-printed servo grippers to pick up payloads
+            dynamically.
+          </li>
+        </ul>
+      </div>
+
+      <hr class="project-divider" />
+      <div class="project-section">
+        <h2>Computer Vision & Hand Gesture Teleoperation</h2>
+
+        <div class="content-split">
+          <div class="text-col">
+            <p>
+              While the internal PID loops keep the robots balanced, navigating
+              them effectively through a warehouse requires spatial awareness.
+              Because onboard cameras would shift the center of mass and
+              overwhelm the microcontrollers, we offloaded the vision processing
+              to an external global system running on a laptop.
+            </p>
+            <p>
+              By mounting an overhead camera, a Python script running OpenCV
+              acts as the "Eye in the Sky." Each robot is equipped with a
+              distinct ArUco marker. The Python script detects these markers in
+              real-time, instantly calculating the robot's exact X/Y coordinates
+              and its Yaw (heading direction) to generate automated routing
+              commands.
+            </p>
+            <p>
+              To push the teleoperation further, we integrated a secondary
+              OpenCV module utilizing <strong>MediaPipe Hand Tracking</strong>.
+              By mapping the 21 3D landmarks of a human hand, the system
+              translates physical hand gestures (like pointing forward or
+              swiping left) into direct kinematic commands. These commands are
+              serialized and blasted over the ESP-NOW network, allowing
+              operators to literally direct the swarm with the wave of a hand.
+            </p>
+          </div>
+
+          <div class="img-col">
+            <img src="../images/forward.jpeg" alt="Hand Gesture Control" />
+            <div class="caption">
+              MediaPipe tracking skeletal hand landmarks to trigger directional
+              commands.
+            </div>
+
+            <img src="../images/nav1.png" alt="Robot ArUco Tracking" />
+            <div class="caption">
+              Python OpenCV tracking the ArUco marker to calculate vectors.
+            </div>
+          </div>
+        </div>
+
+        <h3 style="text-align: center; margin-top: 2rem">
+          Autonomous Navigation Demo
+        </h3>
+        <iframe
+          class="project-video"
+          src="https://www.youtube.com/embed/ys7Rda4Vqj8"
+          title="Project S.P.L.I.T. Navigation Demo"
+          frameborder="0"
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+            web-share;
+          "
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+
+      <hr class="project-divider" />
+
+      <div class="project-section">
+        <h2>Conclusion & System Validation</h2>
+        <p>
+          Project S.P.L.I.T. successfully demonstrated that high-density
+          logistics can be achieved without the spatial penalties of traditional
+          four-wheeled rovers. By aggressively optimizing the 200 Hz cascaded
+          loops and applying a digital low-pass filter to our sensor data, we
+          achieved near-zero pitch error, completely neutralizing motor
+          vibrations to lock the robots in place.
+        </p>
+        <p>
+          Furthermore, the dynamic gripping system proved that a self-balancing
+          inverted pendulum can maintain equilibrium during abrupt
+          center-of-mass shifts, allowing the servo grippers to manipulate
+          payloads flawlessly without tipping over.
+        </p>
+
+        <img
+          src="../images/poster.png"
+          alt="Project S.P.L.I.T. Competition Poster"
+          class="project-img"
+          style="box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3)"
+        />
+
+        <h3>Reflections & Future Improvements</h3>
+        <p>
+          Building a distributed-architecture swarm robot in just
+          <strong>two weeks</strong> forced us to make some aggressive
+          compromises. If we were to design a "V2" of this system, here is
+          exactly what we would do differently:
+        </p>
+        <ul>
+          <li>
+            <strong>Custom PCB & Grounding:</strong> Wiring everything with
+            jumper cables created a massive grounding headache, which
+            occasionally caused our I2C bus to freeze and crash the MPU6050. A
+            custom-printed PCB would eliminate the wire spaghetti and
+            drastically improve electrical stability.
+          </li>
+          <li>
+            <strong>Modern Motor Drivers & Actuation:</strong> The L298N motor
+            driver is an archaic, inefficient dinosaur that loses a lot of
+            voltage as heat. We would upgrade to a modern MOSFET-based driver.
+            We also want to experiment with Stepper Motors or low-KV BLDC motors
+            to provide the massive low-end torque needed for incline balancing.
+          </li>
+          <li>
+            <strong>Power Management:</strong> Our current battery drained
+            incredibly fast under the load of the dual ESP32s and motors. We
+            need a larger capacity pack and a dedicated hardware protection
+            circuit to prevent the LiPo batteries from dangerous
+            over-discharging.
+          </li>
+          <li>
+            <strong>Processing Power:</strong> We would upgrade the core brains
+            from the standard ESP32 to the newer ESP32-S3 or S2 for faster
+            floating-point math and better memory allocation.
+          </li>
+          <li>
+            <strong>Mechanical Chassis:</strong> While the threaded rods and
+            acrylic plates worked for prototyping, a fully custom 3D-printed
+            unibody chassis would be much more rigid and less prone to vibration
+            resonance.
+          </li>
+          <li>
+            <strong>The Original "S.P.L.I.T." Vision:</strong> Due to the
+            two-week time limit, we had to scrap our original mechanical
+            mechanism—a system where the two robots would magnetically dock
+            back-to-back to form a heavy-lifting 4-wheel rover, and then
+            literally "split" apart using a 3D-printed scissor mechanism to do
+            micro-deliveries. This remains our ultimate goal for the swarm.
+          </li>
+        </ul>
+
+        <h3>Acknowledgements</h3>
+        <p>
+          This project would not have been possible without the relentless late
+          nights, debugging sessions, and brilliant engineering of my teammates
+          at the University of Prince Mugrin.
+        </p>
+        <p>
+          A massive thank you to my fellow Electrical Engineering colleagues,
+          <strong>Ibrahim Albarbari</strong> and
+          <strong>Ghazi Alhartani</strong>, for tackling the rigorous hardware
+          and control theory challenges, and to our Artificial Intelligence
+          specialist, <strong>Hassan Nasr</strong>, for elevating the swarm's
+          logic and vision capabilities. We built something truly incredible
+          together.
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        © <span id="current-year"></span> Abdelrahman Elawady. All rights
+        reserved.
+      </p>
+    </footer>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+
+    <script>
+      const themeToggle = document.getElementById("theme-toggle");
+      const body = document.body;
+
+      // Check local storage for theme preference
+      const currentTheme = localStorage.getItem("theme") || "dark";
+      if (currentTheme === "light") body.classList.remove("dark-mode");
+      else body.classList.add("dark-mode");
+
+      // Toggle Event Listener
+      themeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem(
+          "theme",
+          body.classList.contains("dark-mode") ? "dark" : "light",
+        );
+      });
+
+      // Auto-update footer year
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>

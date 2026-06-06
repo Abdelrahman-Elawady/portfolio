@@ -45,13 +45,13 @@
   ],
   "projects": [
     {
-      "image": "images/SPLIT.jpg",
+      "image": "images/split.png",
       "title": "SPLIT Autonomous Robotic Swarm",
-      "subtitle": "Cascaded PID & Computer Vision",
+      "subtitle": "Snapping Pendulums Literally In Two",
       "description": "Designed and fabricated a two-wheeled autonomous robotic swarm architecture optimized for high-density warehouse logistics. This system features a distributed ESP32 network, an MPU6050 sensor fused with a Kalman filter, and a custom cascaded PID control system operating at 200 Hz for flawless inverted pendulum stability. The project is further enhanced by an integrated OpenCV artificial intelligence model, enabling intuitive gesture-based teleoperation and fully autonomous pathfinding.",
       "date": "2026-06",
       "link": "#",
-      "page": "coming_soon.html"
+      "page": "projects/project_split.html"
     },
     {
       "image": "images/PLC-sorting-system.jpeg",
