@@ -537,54 +537,129 @@
 
       <hr class="project-divider" />
       <div class="project-section">
-        <h2>Control Theory: Taming the Inverted Pendulum</h2>
+        <h2>Mathematical Modeling & Control Theory</h2>
+
+        <div class="content-split">
+          <div class="text-col">
+            <p>
+              Before writing a single line of code, we must understand the
+              physics governing our robot. A two-wheeled self-balancing robot is
+              fundamentally an <strong>Inverted Pendulum on a Cart</strong>.
+              Because its center of mass sits above its pivot point (the wheel
+              axle), the system is naturally unstable and nonlinear. If left
+              alone, gravity will immediately pull it to the ground.
+            </p>
+            <p>
+              To control this, we must derive the system equations of motion.
+              Engineers typically use one of two methods:
+            </p>
+            <ul>
+              <li>
+                <strong>Newton-Euler Mechanics:</strong> This involves drawing
+                free-body diagrams and calculating the sum of forces and torques
+                using $F=ma$ and $\tau=I\alpha$. While intuitive, it becomes
+                highly complex when dealing with the internal reaction forces
+                between the wheels and the chassis.
+              </li>
+              <li>
+                <strong>Lagrangian Mechanics:</strong> A more elegant,
+                energy-based approach. Instead of calculating vector forces, we
+                analyze the total kinetic energy ($T$) and potential energy
+                ($V$) of the system to define the Lagrangian function ($L$).
+              </li>
+            </ul>
+          </div>
+
+          <div class="img-col">
+            <img
+              src="../images/mathematical_model.png"
+              alt="Mathematical Model of a Two-Wheeled Inverted Pendulum"
+            />
+            <div class="caption">
+              Free-body diagram parameters defining the center of mass, wheel
+              radius, and tilt angle ($\theta$).
+            </div>
+          </div>
+        </div>
+
+        <h3>The Lagrangian Derivation</h3>
+        <p>By utilizing the energy method, we define our Lagrangian:</p>
+
+        <div class="math-block">$$ L = T - V $$</div>
+
         <p>
-          Keeping a two-wheeled robot upright is a classic control theory
-          problem. Because the center of mass sits high above the wheel axis,
-          the system is naturally unstable. To maintain equilibrium, we
-          implemented a
-          <strong
-            >Cascaded PID (Proportional-Integral-Derivative) Controller</strong
-          >.
+          We then apply the Euler-Lagrange equation to the generalized
+          coordinates (the tilt angle $\theta$ and the linear displacement $x$):
         </p>
 
         <div class="math-block">
-          $$ Output(t) = K_p \cdot e(t) + K_i \int_{0}^{t} e(\tau) d\tau + K_d
+          $$ \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}_i} \right) -
+          \frac{\partial L}{\partial q_i} = Q_i $$
+        </div>
+
+        <p>
+          Solving these partial derivatives yields the nonlinear equations of
+          motion. For control purposes, these equations are typically linearized
+          around the vertical operating point ($\theta \approx 0$), allowing us
+          to apply standard control strategies to keep the robot upright.
+        </p>
+
+        <h3>Control Strategies</h3>
+        <p>
+          With the mathematical model defined, we can implement algorithms to
+          dictate how the motors should react to the tilt angle. Here are the
+          primary methods considered for robotic balancing:
+        </p>
+
+        <h4>1. Cascaded PID Control (Our Chosen Method)</h4>
+        <p>
+          The Proportional-Integral-Derivative controller is the industry
+          standard for its robustness and simplicity. It calculates an error
+          value as the difference between a desired setpoint and a measured
+          process variable, applying a correction based on proportional,
+          integral, and derivative terms.
+        </p>
+
+        <div class="math-block">
+          $$ u(t) = K_p e(t) + K_i \int_{0}^{t} e(\tau) d\tau + K_d
           \frac{de(t)}{dt} $$
         </div>
 
         <p>
-          The system relies on three simultaneous control loops working in
-          harmony:
+          For S.P.L.I.T., we implemented a <strong>Cascaded PID</strong>. An
+          inner high-speed loop (200 Hz) manages the tilt angle using the
+          MPU6050, while a slower outer loop (10 Hz) manages the wheel encoder
+          position. This ensures the robot not only stays upright but also
+          actively holds its exact physical location on the floor.
         </p>
-        <ul>
-          <li>
-            <strong>The Inner Angle Loop (200 Hz):</strong> The fastest loop. It
-            calculates the difference between the robot's current tilt (derived
-            from a Kalman filter) and the target angle, outputting raw PWM
-            signals to the motor drivers to prevent falling.
-          </li>
-          <li>
-            <strong>The Outer Speed/Position Loop (10 Hz):</strong> Reads the
-            high-resolution wheel encoders. If the robot drifts from its target
-            position, this loop calculates an error and slightly shifts the
-            <em>Target Angle</em> of the inner loop. The robot leans forward to
-            catch itself, naturally driving it to the correct location.
-          </li>
-          <li>
-            <strong>The Yaw Loop (200 Hz):</strong> Reads the Z-axis gyroscope
-            to ensure the two motors spin in perfect synchronization, preventing
-            the robot from unintentionally spinning out of control during rapid
-            accelerations.
-          </li>
-        </ul>
+
+        <h4>2. LQR (Linear Quadratic Regulator)</h4>
         <p>
-          Rather than relying on the MPU6050's built-in DMP (Digital Motion
-          Processor)—which introduces unwanted latency—we process the raw
-          accelerometer and gyroscope data directly through our own programmed
-          <strong>Kalman Filter</strong>. This allows us to optimally fuse the
-          data, filtering out high-frequency motor vibrations while correcting
-          long-term gyroscope drift.
+          LQR is a modern, optimal control strategy. Unlike PID which requires
+          manual tuning of three separate gains, LQR uses the linearized
+          state-space model of the robot ($\dot{x} = Ax + Bu$). It calculates a
+          control matrix ($K$) by minimizing a mathematical cost function ($J$):
+        </p>
+
+        <div class="math-block">
+          $$ J = \int_{0}^{\infty} \left( x^T Q x + u^T R u \right) dt $$
+        </div>
+
+        <p>
+          The engineer simply tunes the $Q$ and $R$ matrices to penalize angle
+          error versus battery usage, and the algorithm mathematically
+          guarantees the most optimal motor response.
+        </p>
+
+        <h4>3. Advanced Methods: MPC & Artificial Intelligence</h4>
+        <p>
+          For highly dynamic environments, researchers look to
+          <strong>Model Predictive Control (MPC)</strong>, which simulates
+          future states of the robot to predict and avoid collisions while
+          balancing. Alternatively,
+          <strong>Reinforcement Learning (RL)</strong> allows the robot to learn
+          balancing through trial and error in a simulated environment before
+          transferring that neural network model to the physical ESP32.
         </p>
       </div>
 
@@ -804,6 +879,16 @@
     </footer>
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+        },
+      };
+    </script>
     <script
       id="MathJax-script"
       async
