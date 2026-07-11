@@ -59,7 +59,7 @@
       "subtitle": "Ladder Logic & Machine Learning",
       "description": "Designed and simulated an automated medical supply conveyor network using Factory I/O and Siemens TIA Portal. The system utilizes Ladder Logic, sensors, and actuators to route packages to the ER, ICU, and Surgery wings. A companion Python machine learning model (Random Forest) was also developed to predict department demand based on temporal and environmental data.",
       "date": "2026-05",
-      "link": "https://www.linkedin.com/posts/abdelrahmanelawady_plc-industrialautomation-siemens-ugcPost-7457902019509506049-fUI1?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC9AkNIBm3OMOSBrlaS70pPcim2XlX0p1Fw"
+      "link": "https://pmqu-my.sharepoint.com/:f:/g/personal/4413746_upm_edu_sa/IgCMhOOg7-UJS40D4_70RmyNAVeiD6PP8U7WkzSh5DRUZQQ?e=rBwisW"
     },
     {
       "image": "images/Plasma.jpg",
@@ -100,7 +100,7 @@
       "subtitle": "ESP32 Wireless Office Panel",
       "description": "Designed and built a wireless availability door sign system aimed at improving workplace communication. By integrating the ESP32 microcontroller with a 32x8 WS2812 LED matrix, the system provided real-time status updates via Bluetooth-low-energy (BLE) technology. In this project, we learned a great deal of information about",
       "date": "2024-11",
-      "link": "https://www.linkedin.com/in/abdelrahmanelawady/details/projects/"
+      "link": "https://abdelrahman-elawady.github.io/our-work/"
     },
     {
       "image": "images/timer555pwmcontroller.jpg",
@@ -124,7 +124,7 @@
       "subtitle": "Shift Registers manipulation",
       "description": "Collaborated with a team to develop an Arduino-based counter system that counts using a 74HC165 shift register and presents results in hexadecimal format on a 7-segment display. The project demonstrated our ability to combine hardware and softw",
       "date": "2024-09",
-      "link": "https://pmqu-my.sharepoint.com/:w:/g/personal/4410215_upm_edu_sa/EcEkhvvTajJKrXGeOvx01qgBSbyrd4Y5CzzuqWyjbZ8Rfw?e=zqsV5k/"
+      "link": "https://www.tinkercad.com/things/aCxdnQyNKdk-counter-circuit-schematic?sharecode=iOby3a6QhI1TW28IhP_c3B8QQMSdHQeGW7Kv6ZnqZIo"
     },
     {
       "image": "images/matlab.png",
